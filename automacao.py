@@ -66,7 +66,7 @@ class Automacao:
         botao_confirmar: Coordenada | None = None,
         tolerancia: float = 3.0,
         mudancas_para_reiniciar: int = 3,
-        passo_busca_y: int = 40,
+        passo_busca_y: int = 37,
         tentativas_busca: int = 20,
     ):
         """
