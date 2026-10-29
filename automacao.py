@@ -67,7 +67,7 @@ class Automacao:
         tolerancia: float = 3.0,
         mudancas_para_reiniciar: int = 3,
         passo_busca_y: int = 37,
-        tentativas_busca: int = 20,
+        tentativas_busca: int = 18,
     ):
         """
         Args:
@@ -108,9 +108,12 @@ class Automacao:
             self._buscar_e_atualizar()
             self._aguardar_carregamento()
 
+
+
+
     def _baixar_pagina(self):
         """Baixar a página para baixo."""
-        for _ in range(2):
+        for _ in range(3):
             pyautogui.scroll(-1000)
 
     def _buscar_e_atualizar(self):
@@ -119,6 +122,8 @@ class Automacao:
         self._detector.capturar()
 
 
+        mudanca_encontrada = False
+
         for i in range(self._tentativas_busca):
             deslocamento_y = i * self._passo_busca_y
             pos = self._botao_atualizar.deslocar(dy=-deslocamento_y)
@@ -126,12 +131,17 @@ class Automacao:
             pyautogui.click(pos.x, pos.y)
 
             if self._detector.houve_mudanca():
-
+                mudanca_encontrada = True
                 pyautogui.click(self._botao_confirmar.x, self._botao_confirmar.y)
-
                 return
 
-
+        if not mudanca_encontrada:
+            print("  ↳ Nenhuma equipamento encontrado nessa pagina. Indo para a proxima...")
+            pyautogui.click(990, 910)
+            print("  ↳ Aguardando carregar a nova página..")
+            self._detector.aguardar_mudancas(1)
+            self._baixar_pagina()
+            return self._buscar_e_atualizar()
 
     def _aguardar_carregamento(self):
         """Aguarda mudanças significativas na tela antes de reiniciar o ciclo."""
