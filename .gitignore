@@ -1,0 +1,6 @@
+.perfil_navegador/
+progresso.json
+progresso.tmp
+__pycache__/
+.pytest_cache/
+# config.yaml

@@ -1,0 +1,25 @@
+base_url: https://seu-painel.oltcloud.co
+lista_path: /tr-069/device/buscar
+
+# Valores que precisam estar nos filtros da lista antes de o robô começar.
+filtros:
+  model: PSDN
+  sw_version: "09"
+  status: Online
+
+# Só equipamentos exatamente neste modelo e versão são atualizados.
+modelo: PSDN-AX30-40
+versao_atual: 3.0.0.43(09)
+
+firmware:
+  id: "15"
+  nome: Ax3s - 4.2.0.52(SP5C947)
+
+perfil_dir: .perfil_navegador
+arquivo_progresso: progresso.json
+
+tempos_ms:
+  pagina: 60000      # carregamento de lista e página do equipamento
+  interface: 10000   # menu, modal e seletor
+  resposta: 60000    # recarga da página depois de clicar em Atualizar
+  mensagem: 15000    # aparecimento da mensagem depois da recarga
